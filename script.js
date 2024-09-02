@@ -4,6 +4,7 @@ const scissors = document.querySelector("#scissors");
 const score = document.querySelector("#score");
 const round = document.querySelector("#round");
 const result = document.querySelector("#result");
+const refresh = document.querySelector("#refresh");
 let humanScore = 0;
 let computerScore = 0;
 let totalRounds = 0;
@@ -18,6 +19,15 @@ paper.addEventListener("click", () => {
 
 scissors.addEventListener("click", () => {
   playGame("scissors");
+});
+
+refresh.addEventListener("click", () => {
+  humanScore = 0;
+  computerScore = 0;
+  totalRounds = 0;
+  result.textContent = "Current score";
+  round.textContent = "0/0";
+  score.textContent = "Human: 0 - CPU: 0";
 });
 
 function getComputerChoice() {
@@ -86,7 +96,9 @@ function playGame(humanChoice) {
     totalRounds++;
     playRound();
     declareWinner();
-  } else {
+  } else if (totalRounds > 4) {
+    // don't play if game ended already
+  } else if (totalRounds < 4) {
     totalRounds++;
     playRound();
   }
